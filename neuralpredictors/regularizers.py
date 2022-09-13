@@ -173,7 +173,7 @@ class LaplaceL2norm(nn.Module):
         agg_fn = torch.mean if avg else torch.sum
 
         oc, ic, k1, k2 = x.size()
-        return agg_fn(self.laplace(x.view(oc * ic, 1, k1, k2)).pow(2)) / agg_fn(x.view(oc * ic, 1, k1, k2).pow(2))
+        return agg_fn(self.laplace(x.reshape(oc * ic, 1, k1, k2)).pow(2)) / agg_fn(x.reshape(oc * ic, 1, k1, k2).pow(2))
 
 
 class Laplace3d(nn.Module):
